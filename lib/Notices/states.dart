@@ -18,4 +18,8 @@ class States {
       ),
     );
   }
+
+  Future<dynamic> pushAndReplaceName(String route) {
+    return navigate.currentState!.pushReplacementNamed('/$route');
+  }
 }

@@ -28,41 +28,36 @@ class _LogFoodPageState extends State<LogFoodPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Log Food'),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: foodController,
-              decoration: InputDecoration(
-                labelText: 'What Food',
-                border: OutlineInputBorder(),
-              ),
+    return Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          TextField(
+            controller: foodController,
+            decoration: InputDecoration(
+              labelText: 'What Food',
+              border: OutlineInputBorder(),
             ),
-            const SizedBox(
-              height: 20,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: calorieController,
+            decoration: InputDecoration(
+              labelText: 'Input Calories',
+              border: OutlineInputBorder(),
             ),
-            TextField(
-              controller: calorieController,
-              decoration: InputDecoration(
-                labelText: 'Input Calories',
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            ElevatedButton(
-                onPressed: isLoading ? null : logFood,
-                child: isLoading
-                    ? SpinKitDualRing(color: yellowScheme)
-                    : Text('Log Entry')),
-          ],
-        ),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: isLoading ? null : logFood,
+              child: isLoading
+                  ? SpinKitDualRing(color: yellowScheme)
+                  : Text('Log Entry')),
+        ],
       ),
     );
   }
@@ -91,6 +86,5 @@ class _LogFoodPageState extends State<LogFoodPage> {
       isLoading = false;
     });
     States.instance.showtheSnackbar(title: 'Food Log Saved!');
-    //Navigator.pop(context);
   }
 }

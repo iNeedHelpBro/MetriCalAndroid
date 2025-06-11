@@ -43,7 +43,8 @@ dependencies:
   fl_chart: ^0.71.0
   intl: ^0.20.2
   flutter_dotenv: ^5.2.1
-
+  app_links:
+  #flutter_web_plugins:
 dev_dependencies:
   flutter_test:
     sdk: flutter

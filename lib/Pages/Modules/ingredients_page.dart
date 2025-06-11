@@ -30,40 +30,35 @@ class _IngredientsPageState extends State<IngredientsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Ingredients'),
-      ),
-      body: Column(
-        children: [
-          TextField(
-            controller: search,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Search Ingredients',
-            ),
+    return Column(
+      children: [
+        TextField(
+          controller: search,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Search Ingredients',
           ),
-          const SizedBox(
-            height: 20,
-          ),
-          Expanded(
-              child: filterIngredients.isEmpty
-                  ? Center(
-                      child: Text('No Ingredients found'),
-                    )
-                  : ListView.builder(
-                      itemCount: filterIngredients.length,
-                      itemBuilder: (context, index) {
-                        final ingredient = filterIngredients[index];
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Expanded(
+            child: filterIngredients.isEmpty
+                ? Center(
+                    child: Text('No Ingredients found'),
+                  )
+                : ListView.builder(
+                    itemCount: filterIngredients.length,
+                    itemBuilder: (context, index) {
+                      final ingredient = filterIngredients[index];
 
-                        return ListTile(
-                          title: Text(ingredient['name']),
-                          trailing: Text('${ingredient['calories']} kcal'),
-                        );
-                      },
-                    ))
-        ],
-      ),
+                      return ListTile(
+                        title: Text(ingredient['name']),
+                        trailing: Text('${ingredient['calories']} kcal'),
+                      );
+                    },
+                  ))
+      ],
     );
   }
 
@@ -73,6 +68,7 @@ class _IngredientsPageState extends State<IngredientsPage> {
         .select()
         .order('name', ascending: true);
 
+    if (!mounted) return;
     setState(() {
       ingredients = List<Map<String, dynamic>>.from(res);
       filterIngredients = ingredients;

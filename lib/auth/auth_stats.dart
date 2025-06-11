@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:metrical/Dumps/dumps.dart';
-import 'package:metrical/Pages/home_page.dart';
+import 'package:metrical/Pages/Modules/modules.dart';
 import 'package:metrical/Pages/login_page.dart';
-import 'package:metrical/Pages/profile_page.dart';
-import 'package:metrical/Pages/Modules/set_quota_page.dart';
 import 'package:metrical/auth/supabase_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -38,10 +36,10 @@ class _AuthStatsState extends State<AuthStats> {
               ),
             );
           }
-          final sess = snaps.data!.session;
+          final sess = snaps.data?.session;
           if (sess != null) {
-            return HomePage(
-              userId: sess.user.aud,
+            return Modules(
+              userId: sess.user.id,
             );
           } else {
             return const LoginPage();

@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+      <uses-permission android:name="android.permission.INTERNET" />    
     <application
         android:label="MetriCal Android"
         android:name="${applicationName}"
@@ -55,7 +57,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="io.supabase.flutter" />
+            <!-- <data android:scheme="com.example.metrical_android" />-->
         </intent>
     </queries>
 </manifest>

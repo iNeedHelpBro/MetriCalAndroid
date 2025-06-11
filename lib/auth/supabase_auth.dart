@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:lottie/lottie.dart';
 import 'package:metrical/Dumps/dumps.dart';
 import 'package:metrical/Notices/states.dart';
+import 'package:metrical/Pages/Modules/modules.dart';
 import 'package:metrical/Pages/home_page.dart';
 import 'package:metrical/auth/google_auth.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -33,17 +34,19 @@ class SupabaseAuth {
   Future<void> createAccountWithGoogle(BuildContext context) async {
     loadingDialog().then((v) async {
       try {
+        await SupabaseAuth.instance.signOut();
+        await GoogleAuth.instance.googleSignOut();
         final response = await supabaseClient.auth.signInWithOAuth(
-          OAuthProvider.google,
-          redirectTo:
-              kIsWeb ? null : 'com.example.metrical_android://login-callback',
-        );
-        EasyLoading.dismiss();
+            OAuthProvider.google,
+            redirectTo: 'com.example.metrical_android://login-callback/',
+            queryParams: {'prompt': 'select_account'});
         States.instance.showtheSnackbar(
-          title: 'Continue with Google to complete account creation!',
+          title:
+              'Continue with Google to complete account creation! if something went wrong, please restart the app!',
           duration: 5,
           color: yellowScheme,
         );
+        EasyLoading.dismiss();
       } catch (e) {
         EasyLoading.dismiss();
         showDialog(
@@ -133,9 +136,10 @@ class SupabaseAuth {
   Future<void> signInWithGoogle(BuildContext context) async {
     loadingDialog().then((v) async {
       try {
+        await GoogleAuth.instance.googleSignOut();
         final response = await GoogleAuth.instance.googleSignIn();
         final user = response.user;
-        if (response.session != null) {
+        if (response.session != null && response.session != null) {
           EasyLoading.dismiss();
           States.instance.showtheSnackbar(
               title: 'Logged In Successfully!',
@@ -144,9 +148,10 @@ class SupabaseAuth {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => HomePage(
-                      userId: user!.id,
-                    )),
+              builder: (context) => Modules(
+                userId: user!.id,
+              ),
+            ),
           );
         } else {
           States.instance.showtheSnackbar(
@@ -165,6 +170,7 @@ class SupabaseAuth {
 Signing with user's account
 
 */
+
   Future<AuthResponse> signIn(String email, String password) async {
     return await supabaseClient.auth.signInWithPassword(
       email: email,
@@ -201,8 +207,14 @@ Get users account details
   String getCurrentUser() {
     final session = supabaseClient.auth.currentSession;
     final user = session?.user;
+    final userDisplayName = user?.userMetadata?['name'] as String?;
 
-    //return user!.id;
-    return cutTo(user?.email);
+    if (userDisplayName != null && userDisplayName.isNotEmpty) {
+      return userDisplayName;
+    } else if (user != null) {
+      return cutTo(user.email);
+    } else {
+      return 'User';
+    }
   }
 }

@@ -24,37 +24,34 @@ class _SetQuotaPageState extends State<SetQuotaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Text(
-              'Enter your daily calorie goal (e.g 100 kcal): ',
-              style: TextStyle(fontSize: 20),
+    return Padding(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Text(
+            'Enter your daily calorie goal (e.g 100 kcal): ',
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          TextField(
+            controller: quotaController,
+            decoration: InputDecoration(
+              labelText: 'Daily Quota (kcal)',
+              border: OutlineInputBorder(),
             ),
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              controller: quotaController,
-              decoration: InputDecoration(
-                labelText: 'Daily Quota (kcal)',
-                border: OutlineInputBorder(),
-              ),
-              keyboardType: TextInputType.number,
-            ),
-            ElevatedButton(
-              onPressed: isLoading ? null : saveQuota,
-              child: isLoading
-                  ? SpinKitFadingCircle(
-                      color: yellowScheme,
-                    )
-                  : Text('Save Quota'),
-            ),
-          ],
-        ),
+            keyboardType: TextInputType.number,
+          ),
+          ElevatedButton(
+            onPressed: isLoading ? null : saveQuota,
+            child: isLoading
+                ? SpinKitFadingCircle(
+                    color: yellowScheme,
+                  )
+                : Text('Save Quota'),
+          ),
+        ],
       ),
     );
   }
@@ -90,10 +87,5 @@ class _SetQuotaPageState extends State<SetQuotaPage> {
           title: 'Quota save successfully!', color: yellowScheme, duration: 5);
       //Navigator.pop(context);
     });
-  }
-
-  void gotoProfilePage() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const ProfilePage()));
   }
 }
