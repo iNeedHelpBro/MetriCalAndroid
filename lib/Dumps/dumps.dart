@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -13,11 +11,12 @@ App Theme Scheme Color
 Color yellowScheme = const Color.fromARGB(255, 236, 255, 128);
 Color primaryColor = const Color.fromARGB(255, 224, 255, 215);
 Color darkScheme = const Color.fromARGB(255, 49, 52, 39);
+
 ColorScheme metricalColors = const ColorScheme(
   brightness: Brightness.light,
-  primary: Color(0xFF8E44AD), // Purple (30%)
-  secondary: Color(0xFF27AE60), // Green (10%)
-  tertiary: Color.fromARGB(255, 188, 210, 216), // Light gray (60%)
+  primary: Color(0xFF8E44AD),
+  secondary: Color(0xFF27AE60),
+  tertiary: Color.fromARGB(255, 188, 210, 216),
   surface: Colors.white,
   onPrimary: Colors.white,
   onSecondary: Colors.white,
@@ -71,6 +70,11 @@ Check if the user creates an account with the @gmail.com as their provider
 bool isAGmailProvider(String? email) {
   return email != null && email.endsWith('@gmail.com');
 }
+/*
+
+TextTheme Presets
+
+*/
 
 TextTheme themes = TextTheme(
     headlineLarge: GoogleFonts.sora(

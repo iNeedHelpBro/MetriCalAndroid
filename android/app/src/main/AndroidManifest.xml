@@ -32,8 +32,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data 
-                    android:scheme="com.example.metrical_android"
+                    android:scheme="io.supabase.metricalandroid"
                     android:host="login-callback"                
+                />
+                <data 
+                    android:scheme="io.supabase.metricalandroid"
+                    android:host="reset-password"                
                 />
             </intent-filter>
         </activity>
@@ -57,7 +61,7 @@
             <action android:name="android.intent.action.VIEW" />
             <category android:name="android.intent.category.DEFAULT" />
             <category android:name="android.intent.category.BROWSABLE" />
-            <!-- <data android:scheme="com.example.metrical_android" />-->
+            <!-- <data android:scheme="io.supabase.metricalandroid" />-->
         </intent>
     </queries>
 </manifest>

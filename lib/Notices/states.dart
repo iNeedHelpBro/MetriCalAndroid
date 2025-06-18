@@ -22,4 +22,8 @@ class States {
   Future<dynamic> pushAndReplaceName(String route) {
     return navigate.currentState!.pushReplacementNamed('/$route');
   }
+
+  Future<dynamic> pushPage(String route) {
+    return navigate.currentState!.pushNamed('/$route');
+  }
 }

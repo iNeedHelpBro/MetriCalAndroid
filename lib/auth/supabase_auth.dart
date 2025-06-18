@@ -38,7 +38,7 @@ class SupabaseAuth {
         await GoogleAuth.instance.googleSignOut();
         final response = await supabaseClient.auth.signInWithOAuth(
             OAuthProvider.google,
-            redirectTo: 'com.example.metrical_android://login-callback/',
+            redirectTo: 'io.supabase.metricalandroid://login-callback/',
             queryParams: {'prompt': 'select_account'});
         States.instance.showtheSnackbar(
           title:
@@ -90,7 +90,7 @@ class SupabaseAuth {
     //         OAuthProvider.google,
     //         redirectTo: kIsWeb
     //             ? null
-    //             : 'com.example.metrical_android://login-callback');
+    //             : 'io.supabase.metricalandroid://login-callback');
     //     if (response == true) {
     //       //States.instance.showtheSnackbar(title: 'Account Created!');
     //       EasyLoading.dismiss();
@@ -215,6 +215,20 @@ Get users account details
       return cutTo(user.email);
     } else {
       return 'User';
+    }
+  }
+
+  void forgotPassword(TextEditingController password) async {
+    final newPass = password.text.trim();
+
+    try {
+      await supabaseClient.auth.updateUser(
+        UserAttributes(password: newPass),
+      );
+      States.instance.showtheSnackbar(title: 'Passowrd updated!');
+    } catch (e) {
+      States.instance.showtheSnackbar(title: 'Error resetting password');
+      print('Error: $e');
     }
   }
 }
